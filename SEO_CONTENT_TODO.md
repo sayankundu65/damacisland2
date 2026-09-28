@@ -10,7 +10,7 @@ This document lists all specific business, legal, and operational inputs require
 | :--- | :--- | :--- | :--- |
 | `about.html`, `contact.html`, `terms.html` | `TODO: Add official Dubai RERA Project Registration Number` | Real Estate Regulatory Agency (RERA) project permit number and escrow account details for DAMAC Islands 2. | Inserted placeholder in schema & page text |
 | `about.html`, `contact.html` | `TODO: Add Certified Broker License / ORN Number` | If marketing as an authorized channel partner in India/UAE, provide the ORN (Office Registration Number) and BRN (Broker Registration Number). | Inserted placeholder in schema & page text |
-| `contact.html`, Schema.org | `TODO: Add official customer service telephone number` | Verified UAE and India contact phone numbers with country codes (e.g., `+971 4 ...` / `+91 ...`). | Placeholder `+971 4 000 0000` / `+91 00000 00000` |
+| `contact.html`, `index.html` Schema.org | Customer Service Telephone & WhatsApp | UAE: `+971 58 534 7908`<br>India: `+91 99900 82900` | **Added & Active** (Direct calls & WhatsApp chat links enabled) |
 | `contact.html`, `privacy-policy.html`, `terms.html` | `TODO: Add official compliance/support email` | Designated official email for lead inquiries and GDPR/data privacy requests (e.g., `inquiries@damacisland2.com` or `sales@...`). | Placeholder `inquiries@damacisland2.vercel.app` / `privacy@...` |
 | `privacy-policy.html`, `terms.html` | `TODO: Add legal operating company name and registered office address` | Official corporate entity name registered in India/UAE handling the campaign portal. | Placeholder `DAMAC Properties Official Channel Partner` |
 
