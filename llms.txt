@@ -1,0 +1,33 @@
+# Damac Island 2
+
+> Damac Island 2 is a luxury water-inspired master development by DAMAC Properties in Dubai, UAE, offering luxury townhouses, twin villas, standalone villas, and 45+ resort amenities.
+
+## Project Summary
+- Project: DAMAC Islands 2 (Damac Island 2)
+- Master Developer: DAMAC Properties
+- Location: Dubai, United Arab Emirates (accessible via Emirates Road E611 and Al Ain Road)
+- Project Type: Master-planned waterfront residential island community
+- Inspiration: 8 global tropical islands (Bahamas, Tahiti, Bermuda, Barbados, Cuba, Maui, Mauritius, Antigua)
+- Payment Plan: 75/25 construction-linked schedule (20% booking, 55% during construction, 25% upon handover)
+- Residency Benefits: Eligible for UAE 10-Year Golden Visa (for investments of AED 2,000,000 / ₹4.5+ Cr and above)
+
+## Residential Collections
+- DS-V45: 6-Bedroom Luxury Standalone Villa + Maid (6,276.33 sq.ft / 583.09 sq.m)
+- DSTW: 5-Bedroom Twin Villa + Maid (3,492.24 sq.ft / 324.44 sq.m)
+- DSTH-E: 5-Bedroom End Unit Townhouse + Maid (3,158.24 sq.ft / 293.41 sq.m)
+- DSTH-M2: 5-Bedroom Mid Unit Townhouse + Maid (2,829.29 sq.ft / 262.85 sq.m)
+- DSTH-M1: 4-Bedroom Mid Unit Townhouse (2,185.50 sq.ft / 203.04 sq.m)
+
+## Core Amenities (45+ Features)
+- Crystal water lagoons with private swimmable white sand beaches
+- Indoor Aqua Dome & aquatic adventure park
+- Jungle river, fruit market, iguana park, hot springs spa
+- Floating outdoor lagoon cinema & amphitheater
+- Cycling & jogging tracks, fitness club, mini golf, community retail promenade
+
+## Official Links
+- Home: https://damacisland2.vercel.app/
+- About: https://damacisland2.vercel.app/about
+- Contact: https://damacisland2.vercel.app/contact
+- Privacy Policy: https://damacisland2.vercel.app/privacy-policy
+- Terms: https://damacisland2.vercel.app/terms
