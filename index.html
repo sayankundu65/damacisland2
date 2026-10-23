@@ -1864,7 +1864,7 @@ img {
 <span class="formBrandBadge">DIRECT SALES</span>
 </div>
 <h3 id="modalFormTitle">Request Information &amp; Pricing</h3>
-<p class="modalFormSubtitle">Get instant floor plans, payment schedules, and private viewing slots.</p>
+<p class="modalFormSubtitle" id="modalFormSubtitle">Get instant floor plans, payment schedules, and private viewing slots.</p>
 </div>
 <form class="modalForm" id="popupForm">
 <div class="field">
@@ -1961,13 +1961,22 @@ function seeFloorPlan(unitCode){
 // =========================================================
 // ENQUIRY POPUP MODAL FUNCTIONALITY & CTA HOOKS
 // =========================================================
-function openEnquiryModal(prefillCollection, contextTitle) {
+// Track source and auto-popup states
+let currentPopupSource = 'Popup Modal';
+let autoPopupFirstShown = false;
+let autoPopupSecondShown = false;
+let autoPopupSecondTimer = null;
+let userSubmittedForm = false;
+
+function openEnquiryModal(prefillCollection, contextTitle, customSubtitle, sourceName) {
   const modal = document.getElementById('enquiryModal');
   if (!modal) return;
   modal.classList.add('active');
   modal.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
   
+  currentPopupSource = sourceName || 'Popup Modal';
+
   if (prefillCollection) {
     const sel = document.getElementById('popupFormCollection');
     if (sel) {
@@ -1984,6 +1993,11 @@ function openEnquiryModal(prefillCollection, contextTitle) {
   if (titleEl) {
     titleEl.textContent = contextTitle || 'Request Information & Pricing';
   }
+
+  const subEl = document.getElementById('modalFormSubtitle');
+  if (subEl) {
+    subEl.textContent = customSubtitle || 'Get instant floor plans, payment schedules, and private viewing slots.';
+  }
   
   setTimeout(() => {
     const nameInput = document.getElementById('popupFormName');
@@ -1991,23 +2005,58 @@ function openEnquiryModal(prefillCollection, contextTitle) {
   }, 160);
 }
 
-function closeEnquiryModal() {
+function closeEnquiryModal(isUserClose = false) {
   const modal = document.getElementById('enquiryModal');
   if (!modal) return;
   modal.classList.remove('active');
   modal.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
+
+  // If user closed the popup (and hasn't submitted a form yet), trigger 2nd popup after 10 seconds
+  if (isUserClose && !userSubmittedForm && !autoPopupSecondShown) {
+    if (autoPopupSecondTimer) clearTimeout(autoPopupSecondTimer);
+    autoPopupSecondTimer = setTimeout(() => {
+      const activeModal = document.getElementById('enquiryModal');
+      const isAlreadyOpen = activeModal && activeModal.classList.contains('active');
+      if (!isAlreadyOpen && !userSubmittedForm && !autoPopupSecondShown) {
+        autoPopupSecondShown = true;
+        openEnquiryModal(
+          null,
+          'Don\'t Miss Out on DAMAC Island 2!',
+          'Unlock exclusive launch inventory, 1% monthly payment perks, and direct developer pricing.',
+          'Second Auto Popup (10s Reminder)'
+        );
+      }
+    }, 10000); // 10 seconds after crossing the first popup
+  }
 }
 
 const modalCloseBtn = document.getElementById('enquiryModalClose');
 const modalBackdrop = document.getElementById('enquiryModalBackdrop');
-if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeEnquiryModal);
-if (modalBackdrop) modalBackdrop.addEventListener('click', closeEnquiryModal);
+if (modalCloseBtn) modalCloseBtn.addEventListener('click', () => closeEnquiryModal(true));
+if (modalBackdrop) modalBackdrop.addEventListener('click', () => closeEnquiryModal(true));
 
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && document.getElementById('enquiryModal')?.classList.contains('active')) {
-    closeEnquiryModal();
+    closeEnquiryModal(true);
   }
+});
+
+// Auto-trigger first popup 2 seconds after page load
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const activeModal = document.getElementById('enquiryModal');
+    const isAlreadyOpen = activeModal && activeModal.classList.contains('active');
+    if (!isAlreadyOpen && !userSubmittedForm && !autoPopupFirstShown) {
+      autoPopupFirstShown = true;
+      openEnquiryModal(
+        null,
+        'Let Us Send You the Brochure',
+        'Receive the complete DAMAC Island 2 master brochure, floor layouts & VIP launch price list directly on WhatsApp/Email.',
+        'First Auto Popup (2s Brochure)'
+      );
+    }
+  }, 2000); // 2 seconds after opening website
 });
 
 // Hook ALL CTAs across the site to open the popup modal form!
@@ -2125,7 +2174,7 @@ if (popupForm) {
       collection: document.getElementById('popupFormCollection')?.value || '',
       intent: document.getElementById('popupFormIntent')?.value || '',
       budget: document.getElementById('popupFormBudget')?.value || '',
-      formSource: 'Popup Modal'
+      formSource: currentPopupSource || 'Popup Modal'
     };
 
     // Send data to Google Sheets
@@ -2142,7 +2191,9 @@ if (popupForm) {
     }
 
     // Close modal, reset button and show confirmation toast
-    closeEnquiryModal();
+    userSubmittedForm = true;
+    if (autoPopupSecondTimer) clearTimeout(autoPopupSecondTimer);
+    closeEnquiryModal(false);
     if (submitBtn) {
       submitBtn.disabled = false;
       submitBtn.innerHTML = originalBtnText;
@@ -2200,6 +2251,8 @@ if (bottomForm) {
       submitBtn.innerHTML = originalBtnText;
     }
 
+    userSubmittedForm = true;
+    if (autoPopupSecondTimer) clearTimeout(autoPopupSecondTimer);
     const toast = document.getElementById('toast');
     if (toast) {
       toast.classList.add('show');
